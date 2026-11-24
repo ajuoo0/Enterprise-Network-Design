@@ -1,0 +1,119 @@
+R1-CONFIGURATION
+
+R1(config)#do sh running-config
+Building configuration...
+
+Current configuration : 1499 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R1
+!
+!
+!
+enable secret 5 $1$mERr$yxFJ/lKn6.dtpD9GTmktv1
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524ILY9-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/1
+ ip address 10.0.10.1 255.255.255.0
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 10.0.20.1 255.255.255.0
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ ip address 203.0.113.2 255.255.255.0
+ ip nat outside
+!
+interface Serial0/0/1
+ ip address 200.0.10.1 255.255.255.0
+ clock rate 64000
+!
+interface Serial0/1/0
+ ip address 200.0.20.1 255.255.255.0
+ clock rate 64000
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.0.10.0 0.0.0.255 area 0
+ network 10.0.20.0 0.0.0.255 area 0
+ network 200.0.10.0 0.0.0.255 area 0
+ network 200.0.20.0 0.0.0.255 area 0
+ network 200.0.113.0 0.0.0.255 area 0
+ network 203.0.113.0 0.0.0.255 area 0
+!
+ip nat inside source list 10 interface Serial0/0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 203.0.113.1 
+!
+ip flow-export version 9
+!
+!
+access-list 10 permit 192.168.0.0 0.0.255.255
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
