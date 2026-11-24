@@ -16,7 +16,7 @@ The enterprise network consists of:
 - Centralized network services
 
 ### Network Topology Diagram
-
+![MAGIC Technologies Network Topology](Topology/enterprise-topology.png)
 
 
 ## 3. Device Inventory
